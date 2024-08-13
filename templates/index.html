@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support and Resistance Marker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+        }
+
+        main {
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .content {
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .form-section {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        h2 {
+            color: #333;
+            margin-top: 20px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Support and Resistance Marker</h1>
+    </header>
+    <main>
+        <div class="content">
+            <div class="form-section">
+                <h2>Input Details</h2>
+                <form method="post">
+                    <label for="ticker">Ticker Symbol (According to Yahoo Finance):</label>
+                    <input type="text" id="ticker" name="ticker" required>
+
+                    <label for="interval">Interval:</label>
+                    <select name="interval" id="interval">
+                        <option value="15m">15M</option>
+                        <option value="30m">30M</option>
+                        <option value="1h">1H</option>
+                        <option value="1d">1D</option>
+                        <option value="1wk">1W</option>
+                    </select>
+
+                    <label for="start_date">Start Date:</label>
+                    <input type="date" id="start_date" name="start_date" required>
+
+                    <label for="end_date">End Date:</label>
+                    <input type="date" id="end_date" name="end_date" required>
+
+                    <input type="submit" value="Generate Chart">
+                </form>
+            </div>
+            {% if chart_url %}
+            <div class="chart-section">
+                <h2>Generated Chart:</h2>
+                <img src="{{ chart_url }}" alt="Support and Resistance Chart">
+            </div>
+            {% endif %}
+        </div>
+    </main>
+</body>
+
+</html>
