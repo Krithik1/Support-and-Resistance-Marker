@@ -1,46 +1,32 @@
-resource "aws_security_group" "my_instance_SG" {
-  name_prefix = "krit-"
-  tags = {
-    Name = "my-security-group"
+resource "aws_security_group" "security_group_ec2_instances" {
+  name = "security-group-ec2-instances"
+  description = "Security group for EC2 instances..."
+
+  ingress {
+    from_port = 443
+    to_port = 443
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
-}
 
-resource "aws_security_group_rule" "http_inbound" {
-  type = "ingress"
-  from_port = 80
-  to_port = 80
-  protocol = "tcp"
-  cidr_blocks = ["0.0.0.0/0"]
+  ingress {
+    from_port = 80
+    to_port = 80
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
-  security_group_id = aws_security_group.my_instance_SG.id
-}
+  ingress {
+    from_port = 22
+    to_port = 22
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
-resource "aws_security_group_rule" "ssh_inbound" {
-  type = "ingress"
-  from_port = 22
-  to_port = 22
-  protocol = "tcp"
-  cidr_blocks = ["0.0.0.0/0"]
-
-  security_group_id = aws_security_group.my_instance_SG.id
-}
-
-resource "aws_security_group_rule" "flask_inbound" {
-  type = "ingress"
-  from_port = 5000
-  to_port = 5000
-  protocol = "tcp"
-  cidr_blocks = ["0.0.0.0/0"]
-
-  security_group_id = aws_security_group.my_instance_SG.id
-}
-
-resource "aws_security_group_rule" "downloads" {
-  type = "egress"
-  from_port = 0
-  to_port = 0
-  protocol = "-1"
-  cidr_blocks = ["0.0.0.0/0"]
-
-  security_group_id = aws_security_group.my_instance_SG.id
+  egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
